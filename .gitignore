@@ -1,0 +1,5 @@
+*.pyc
+__pycache__
+/env
+/src/local_settings.py
+
