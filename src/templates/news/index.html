@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load main_tags %}
+
+{% block title %}Новости{% endblock %}
+
+{% block center %}
+    <h4 class="titleh4"><span>Новости</span></h4>
+    <div class="row">
+        <div class="col-md-12">
+            {% for n in news %}
+                <div class="news">
+                    <div class="news_title">
+                        <a href="{% url 'news:news' n.pk %}">{{ n.title }}</a>
+                        <small class="pull-right">
+                            {% if n.author %}
+                                {{ n.author }}&emsp;|&emsp;
+                            {% endif %}
+                            <i class="fa fa-calendar"></i> {{ n.date_add }}
+                            {% if user.is_authenticated and user == n.author %}
+                                | <a href="{% url 'news:edit_news' n.pk %}" title="Изменить новость"><small><i class="fa fa-pencil"></i> </small></a>
+                            {% endif %}
+                        </small>
+                    </div>
+                    <p>{{ n.content|striptags|truncatewords:40|linebreaksbr }}</p>
+                </div><br>
+            {% endfor %}
+            {% paginations news %}
+        </div>
+    </div>
+{% endblock %}
