@@ -18,7 +18,6 @@ INSTALLED_APPS = [
     'src.pages',
     'src.blog',
     'src.accounts',
-    'src.klasses',
     'src.svedenia',
     'src.events',
 
