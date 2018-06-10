@@ -19,7 +19,7 @@ class AddNewsForm(forms.ModelForm):
 class EditNewsForm(forms.ModelForm):
     class Meta:
         model = News
-        fields = ('title', 'content', 'tags', 'date_add')
+        fields = ('title', 'content', 'date_add')
         widgets = {
             'content': RedactorEditor(),
         }
