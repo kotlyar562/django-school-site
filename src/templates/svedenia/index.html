@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Сведения об образовательной организации {% block sved_title %}{% endblock %}
+{% endblock %}
+
+{% block center %}
+    <h4 class="titleh4"><span>
+        {% block sved_name %}Сведения об образовательной организации{% endblock %}
+    </span></h4>
+    <div class="row">
+        <div class="col-md-8">
+            {% block sved_text %}
+                Выберите раздел
+            {% endblock %}
+        </div>
+        <div class="col-md-4">
+            <div class="sidebar-nav">
+                <div class="text-muted" style="border-bottom: 1px solid grey;margin:10px 0"><strong>Разделы</strong></div>
+                <ul class="nav">
+                    {% for g in groups %}
+                        <li {% if g.slug == group.slug %}class="active-bg"{% endif %}><a href="{% url 'svedenia:group' g.slug %}">{{ g.title }}</a></li>
+                    {% endfor %}
+
+
+{#                        <li class="text-danger">Основные сведения:</li>#}
+{#                        <li><a href="/page/rekvizity/">Основные сведения</a></li>#}
+{#                        <li><a href="/page/struktura_ou/">Структура и органы управления образовательной организацией</a></li>#}
+{#                        <li><a href="/page/stranichka_direktora/">Страничка директора</a></li>#}
+{#                        <li><a href="/page/istoriya_shkoly/">История школы</a></li>#}
+{#                        <li><a href="/page/priem_v_shkolu/">Прием в школу</a></li>#}
+{#                        <li><a href="/accounts/">Руководство и педагогический состав</a></li>#}
+{#                        <li><a href="/page/materialno_tehnicheskoe_obespechenie/">Материально-техническое обеспечение</a></li>#}
+{##}
+{#                        <li class="text-danger">Документы:</li>#}
+{#                        <li><a href="/page/oficialnye_dokumenty/">Официальные документы</a></li>#}
+{#                        <li><a href="/page/finansovo_hozyajstvennaya_deyatelnost/">Финансово-хозяйственная деятельность</a></li>#}
+{#                        <li><a href="/page/lokalnye_normativnye_dokumenty/">Локальные нормативные акты</a></li>#}
+{#                        <li><a href="/page/pravila_vnutrennego_rasporyadka_obuchayushihsya/">Правила внутреннего распорядка обучающегося</a></li>#}
+{#                        <li><a href="/page/pravila_vnutrennego_trudovogo_rasporyadka/">Правила внутреннего трудового распорядка</a></li>#}
+{#                        <li><a href="/page/attestaciya_povyshenie_kvalifikacii/">Аттестация, повышение квалификации педагогических работников</a></li>#}
+{#                        <li><a href="/page/publichnyj_otchet/">Отчет о результатах самообследования</a></li>#}
+{#                        <li><a href="/page/platnye_uslugi/">Платные услуги, родительские средства</a></li>#}
+{#                        <li><a href="/page/akty_predpisaniya/">Акты, предписания</a></li>#}
+{##}
+{#                        <li class="text-danger">Образование:</li>#}
+{#                        <li><a href="/page/obrazovanie_obshaya_informajciya/">Общая информация</a></li>#}
+{#                        <li><a href="/page/obrazovatelnye_standarty/">Образовательные стандарты</a></li>#}
+{#                        <li><a href="/page/rabochie_programmy/">Рабочие программы</a></li>#}
+{#                        <li class="text-info" style="margin-left: 15px">Основная образовательная программа:#}
+{#                            <ul class="nav nav-pills nav-stacked" style="margin-left: 5px;">#}
+{#                                <li><a href="/page/osnovnaya_obrazovatelnaya_programma/">Основная образовательная программа</a></li>#}
+{#                                <li><a href="/page/uchebnyj_plan/">Учебный план</a></li>#}
+{#                                <li><a href="/page/kalendarnyj_uchebnyj_grafik/">Календарный учебный график</a></li>#}
+{##}
+{#                            </ul>#}
+{#                        </li>#}
+{#                        <li><a href="/page/organizaciya_uchebnogo_processa/">Организация учебного процесса</a></li>#}
+{#                        <li><a href="/articles/">Методические разработки, статьи</a></li>#}
+{#                        <li><a href="/page/vospitatelnaya_rabota_v_shkole_roditelyam/">Воспитательная работа в школе - информация для родителей</a></li>#}
+{#                        <li><a href="/page/obuchayushiesya/">Обучающиеся</a></li>#}
+{#                        <li><a href="/page/gia_ege/">ГИА, ЕГЭ</a></li>#}
+{#                        <li><a href="/media/2015/11/16/polozhenie_o_yazykah_obucheniya_dlya_sayta.doc">Информация о языках обучения и изучения</a></li>#}
+{##}
+{#                        <li class="text-danger">Организация питания:</li>#}
+{#                        <li><a href="/page/obshaya_informaciya/">Общая информация</a></li>#}
+{#                        <li><a href="/page/razgovor_o_pravilnom_pitanii/">Разговор о правильном питании</a></li>#}
+{#                        <li><a href="/page/kontrol_pitaniya/">Контроль питания</a></li>#}
+{#                        <li><a href="/page/dokumenty_po_pitaniyu/">Документы по питанию</a></li>#}
+{##}
+{#                        <li class="text-danger">Другое:</li>#}
+{#                        <li><a href="/page/bezopasnost/">Безопасность</a></li>#}
+{#                        <li><a href="/page/internet_bezopasnost/">Безопасность в сети Интернет</a></li>#}
+{#                        <li><a href="/page/ozdorovitelnaya_kompaniya/">Оздоровительная компания</a></li>#}
+{#                        <li><a href="/page/antikorrupcionnaya_deyatelnost/">Антикоррупционная деятельность</a></li>#}
+{#                        <li><a href="/page/stipendii/">Стипендии и иные виды материальной поддержки</a></li>#}
+{#                        <li><a href="/page/profsoyuz/">Профсоюз</a></li>#}
+{#                        <li><a href="/page/pravovoeprosveshenie/">Правовое просвещение</a></li>#}
+{##}
+{#                        <li class="text-danger">Другие ресурсы:</li>#}
+{#                        <li><a target="_blank" href="http://www.mon.gov.ru">Сайт Министерства образования и науки РФ</a></li>#}
+{#                        <li><a target="_blank" href="http://monm.rk.gov.ru/">Сайт Министерства образования Республики Крым</a></li>#}
+{#                        <li><a target="_blank" href="http://ege-crimea.ru/">Сайт информационной поддержки ГИА в Республике Крым</a></li>#}
+{#                        <li><a target="_blank" href="http://www.edu.ru">Федеральный портал «Российское образование»</a></li>#}
+{#                        <li><a target="_blank" href="http://window.edu.ru">Информационная система «Единое окно доступа к образовательным ресурсам»</a></li>#}
+{#                        <li><a target="_blank" href="http://school-collection.edu.ru">Единая коллекция цифровых образовательных ресурсов</a></li>#}
+{#                        <li><a target="_blank" href="http://fcior.edu.ru">Федеральный центр информационно-образовательных ресурсов</a></li>#}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
