@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 
-# Create your views here.
+from . models import Page
+
+def page(request, page_slug):
+    page = get_object_or_404(Page, slug=page_slug)
+    return render(request, 'pages/page.html', {'page': page})
