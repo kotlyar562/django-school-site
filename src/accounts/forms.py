@@ -36,7 +36,8 @@ class UserEditForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'email', 'post', 'stag', 'rank', 'statement')
+        fields = ('photo', 'first_name', 'last_name', 'email', 'post', 'stag',
+                  'rank', 'statement')
 
     def clean(self):
         current, new, verify = map(self.cleaned_data.get,

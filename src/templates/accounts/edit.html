@@ -22,7 +22,7 @@
 
 {% block center %}
     <div class="col-md-8 col-md-offset-2">
-        <form method="post">{% csrf_token %}
+        <form method="post" enctype="multipart/form-data">{% csrf_token %}
             <h3>{{ user.get_full_name }}</h3>
             <img src="{% if user.photo %}/media/{{ user.photo }}{% else %}/static/img/no_photo.jpg{% endif %}" class="img-rounded" style="max-width:150px;max-height: 150px">
             <fieldset>
