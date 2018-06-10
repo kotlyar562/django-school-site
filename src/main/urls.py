@@ -1,4 +1,4 @@
-from django.urls import url
+from django.urls import path
 from django.contrib.sitemaps.views import sitemap
 from django.views.generic import TemplateView
 from . import views
