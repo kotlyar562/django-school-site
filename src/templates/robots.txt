@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /admin/
+Host: feo-school7.ru
+Sitemap: http://feo-school7.ru/sitemap.xml

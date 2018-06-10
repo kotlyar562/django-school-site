@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block center%}
+    <div class="row">
+        <div class="col-md-7">
+            {{ home_text.content|safe }}
+        </div>
+        <div class="col-md-5">
+            <div class="ya-site-form ya-site-form_inited_no" style="border-bottom: 1px solid #d1d1ff" onclick="return {'action':'http://feo-school7.ru/search/','arrow':false,'bg':'#efefef','fontsize':14,'fg':'#000000','language':'ru','logo':'rb','publicname':'Поиск по fep-school7.ru','suggest':true,'target':'_self','tld':'ru','type':3,'usebigdictionary':true,'searchid':2265676,'input_fg':'#000000','input_bg':'#ffffff','input_fontStyle':'normal','input_fontWeight':'normal','input_placeholder':'Поиск...','input_placeholderColor':'#000000','input_borderColor':'#cccccc'}"><form action="https://yandex.ru/search/site/" method="get" target="_self"><input type="hidden" name="searchid" value="2265676"/><input type="hidden" name="l10n" value="ru"/><input type="hidden" name="reqenc" value=""/><input type="search" name="text" value=""/><input type="submit" value="Найти"/></form></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script>
+            
+            <h4 class="titleh4"><span class="nb"><i class="fa fa-globe"></i> Новости</span></h4>
+                <div class="well well-sm"><a href="http://bus.gov.ru/pub/info-card/358278?activeTab=3">Результаты независимой оценки образовательных учреждений</a></div>
+                {% for n in last_news %}
+                    {% if n.important %}
+                        <div class="well well-sm">
+                            <div class="news">
+                                <div class="news_title">
+                                    <a class="nb" href="{% url 'news:news' n.pk %}">{{ n.title }}</a>
+                                </div>
+                                {{ n.content|safe|truncatewords_html:20|linebreaksbr }}
+                                <small class="text-muted pull-right">
+                                    {% if n.author %}
+                                        {{ n.author }},&nbsp;
+                                    {% endif %}
+                                    {{ n.date_add }}
+                                </small><div class="clearfix"></div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="news">
+                            <div class="news_title">
+                                <a href="{% url 'news:news' n.pk %}">{{ n.title }}</a>
+                            </div>
+                            {{ n.content|safe|truncatewords_html:20|linebreaksbr }}
+                            <small class="text-muted pull-right">
+                                {% if n.author %}
+                                    {{ n.author }},&nbsp;
+                                {% endif %}
+                                {{ n.date_add }}
+                            </small>
+                            <div class="clearfix"></div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                <a href="/news/" class="pull-right">Все новости &rarr;</a>
+                <div class="clearfix"></div><hr>
+        </div>
+    </div>
+    {% if last_articles %}
+        <div class="row">
+            <div class="col-md-12">
+                <h4 class="titleh4"><span>Последние публикации</span>&nbsp;<a class="pull-right" href="/articles/">Все статьи →</a></h4>
+                {% for article in last_articles %}
+                    <h4 style="margin-bottom: 0"><a href="{% url 'blog:article' article.pk %}">{{ article.title }}</a></h4>
+                    <small class="pull-right"><a href="{% url 'accounts:profile' article.author.pk %}">{{ article.author }}</a>&emsp;<i class="fa fa-calendar"></i> {{ article.date_add }}</small>
+                    <div class="clearfix"></div>
+                    <hr>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

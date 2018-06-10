@@ -1,0 +1,24 @@
+{% load i18n %}
+
+{% if objects.paginator.num_pages > 1 %}
+    <div class="pull-right">
+        <ul class="list-inline">
+            Страницы:&emsp;
+            {% if objects.has_previous %}
+                <li>
+                    <a href="{{ request.path }}{{ gets }}page={{ objects.previous_page_number }}" title="Предыдущая страница">&larr;</a>
+                </li>
+            {% endif %}
+            {% for obj in objects.paginator.page_range %}
+                <li>
+                    <a href="{{ request.path }}{{ gets }}page={{ obj }}" title="На страницу {{ obj }}" {% if obj == objects.number %}class="btn btn-sm btn-info"{% endif %}>{{ obj }}</a>
+                </li>
+            {% endfor %}
+            {% if objects.has_next %}
+                <li>
+                    <a href="{{ request.path }}{{ gets }}page={{ objects.next_page_number }}" title="Следующая страница">&rarr;</a>
+                </li>
+            {% endif %}
+</ul>
+    </div>
+{% endif %}
