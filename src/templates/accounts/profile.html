@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ user_obj.get_full_name }}, {{ user_obj.post }}{% endblock %}
+
+{% block center %}
+    <div class="row">
+        <div class="col-md-3 text-center">
+            <img src="{% if user_obj.photo %}/media/{{ user_obj.photo }}{% else %}/static/img/no_photo.jpg{% endif %}" class="img-rounded img-thumbnail marg_center" style="max-width:150px;max-height: 150px">
+        </div>
+        <div class="col-md-9">
+            <h4 class="titleh4">
+                {{ user_obj.get_full_name }}
+                {% if user.is_authenticated and user == user_obj %}
+                    <div class="pull-right">
+                        <a class="btn btn-sm btn-info" href="{% url 'accounts:edit' %}">Изменить профиль</a>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                Добавить... <i class="fa fa-caret-down"></i>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{% url 'blog:add_article' %}">Статью</a></li>
+                                <li><a href="{% url 'news:add_news' %}">Новость</a></li>
+                                <li><a href="{% url 'fotogallery:change' %}">Фотогалерею</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                {% endif %}
+            </h4>
+            <p>{{ user_obj.post|capfirst }}</p>
+            {% if user.stag %}<p><strong>Стаж: </strong> {{ user_obj.stag }}</p>{% endif %}
+            <p><strong>Категория:</strong> {{ user_obj.get_rank_display }}</p>
+        </div>
+    </div>
+    {% if user_obj.statement %}
+        <div class="row">
+            <div class="col-md-12" style="margin-top: 20px">
+                {{ user_obj.statement|safe }}
+            </div>
+        </div>
+    {% endif %}
+    {% if user_obj.article_set.all %}
+        <div class="row">
+            <div class="col-md-12">
+                <h4 class="titleh4"><span>Публикации</span></h4>
+                {% for pub in user_obj.article_set.all|dictsortreversed:"date_add" %}
+                    <h3>
+                        {% if user.is_authenticated and user == user_obj %}
+                            <a class="pull-right" href="{% url 'blog:edit_article' pub.pk %}" title="Изменить статью"><small><i class="fa fa-pencil"></i></small></a>
+                        {% endif %}
+                        <a href="{% url 'blog:article' pub.pk %}">{{ pub.title|lower|capfirst }}</a>
+                    </h3>
+                    {{ pub.content|striptags|truncatewords:60|linebreaksbr }}
+                    <hr>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

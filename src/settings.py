@@ -1,7 +1,7 @@
 import os
 from . local_settings import *
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -38,6 +38,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'src.urls'
+
+SITE_ID = 1
 
 TEMPLATES = [
     {
@@ -78,6 +80,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+AUTH_USER_MODEL = 'accounts.User'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 

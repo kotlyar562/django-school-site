@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}МБОУ школа №7{% endblock %}</title>
+
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="/static/font-awesome/css/font-awesome.min.css">
+    <link rel='stylesheet' href="/static/css/style.css">
+
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/bxslider/jquery.bxslider.min.js"></script>
+    <link href="/static/bxslider/jquery.bxslider.css" rel="stylesheet" />
+
+    {% block head %}{% endblock %}
+
+    <script type="text/javascript" src="/static/js/myjs.js"></script>
+
+    <meta name="keywords" content="{% block meta_key %}МБОУ Школа №7 Феодосия{% endblock %}"/>
+    <meta name="description" content="{% block description %}Официальный сайт МБОУ школы №7 г.Феодосия Республики Крым {% endblock %}"/>
+    <meta name="generator" content="Django"/>
+    <meta name='yandex-verification' content='46010ee7f46f792d' />
+</head>
+<body>
+<div class="container" id="header">
+    <div class="row">
+        <div class="col-md-12">
+            <img src='/static/img/school.jpg' class="pull-left" style="margin:15px 15px 15px 0">
+            <div class="pull-right" style="margin:15px 0 15px 0">
+                {% if user.is_authenticated %}
+                    {% if user.photo %}<img class="img-rounded pull-left" style="max-height: 95px; margin-right: 10px" src='/media/{{ user.photo }}'>{% endif %}
+                    <a href="{% url 'accounts:profile' user.pk %}">Профиль</a><br>
+                    {% if user.username == 'admin' %}<a href="/admin/">Администрирование</a><br>{% endif %}
+                    <a href="{% url 'accounts:logout' %}">Выйти</a>
+                {% else %}
+                    <a href="{% url 'accounts:login' %}">Вход</a>
+                {% endif %}
+            </div>
+            <h3>Муниципальное бюджетное общеобразовательное учреждение</br>"Школа №7 г.Феодосии Республики Крым"</h3>
+            <p class="text-info">пгт. Приморский, ул.Керченская 10.</p>
+            <p class="text-info">тел. (06562) 6-20-55; (06562) 6-20-51</p>
+            <a class="pull-right" href="#" class="" onclick="dmuGostSettings();" id="enableuGost"><i class="fa fa-eye"></i> Версия для слабовидящих</a>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12" style="padding: 0">
+            <div id="infobardm">Размер шрифта:
+                <a onclick="dmfunctsizeone();" class="dmchangea1">A</a>
+                <a onclick="dmfunctsizetwo();" class="dmchangea2">A</a>
+                <a onclick="dmfunctsizethree();" class="dmchangea3">A</a>
+
+                Изображения <a onclick="dmdisableimage();" class="dmdisableimage">Выключить</a>
+                <a onclick="dmenableimage();" class="dmenableimage">Включить</a>
+
+                Цвет сайта <a onclick="dmcolor1();" class="dmcolor1">Ц</a>
+                <a onclick="dmcolor2();" class="dmcolor2">Ц</a>
+                <a onclick="dmcolor3();" class="dmcolor3">Ц</a>
+
+                <a onclick="dmreset();" class="dmcolor4"><i class="fa fa-times"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 nav_other" style="padding: 0">
+            <nav class="navbar navbar-default" role="navigation" style="margin: 0">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/">Главная</a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li><a href="/svedeniya/osnovnye-svedeniya/">Сведения об образовательной организации</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Страницы <span class="caret"></span></a>
+                                <ul class="dropdown-menu main-menu" role="menu">
+                                    {% include '_nav_pages.html' %}
+                                </ul>
+                            </li>
+                            <li><a href="{% url 'klasses:index' %}">Классы</a></li>
+                            <li><a href="{% url 'accounts:index' %}">Учителя</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="{% url 'pages:page' 'obrasheniya' %}">Обращения граждан</a></li>
+                            <li><a href="{% url 'main:feedback' %}">Вопросы к администрации</a></li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+        </div>
+    </div>
+</div>
+<div class="container main_conteiner">
+    <div style="margin-top: 20px"></div>
+    <div class="row">
+        <div class="col-md-3">
+            {% block left %}
+                {% include '_left.html' %}
+            {% endblock %}
+        </div>
+        <div class="col-md-9">
+            {% if road %}
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="breadcrumb">
+                            {%  for item in road %}
+                                <li>
+                                    <a href="{{ item.link }}">{{ item.title }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            {% endif %}
+            {% if messages%}
+                <ul class="list-unstyled">
+                    {% for message in messages %}
+                        <li><div {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>
+                            <a class="close" data-dismiss="alert">&times;</a>
+                            {{ message }}
+                        </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            {% block center %}{% endblock %}
+        </div>
+    </div>
+</div>
+<div class="pull-right" style="margin-right:20px;">
+    <!-- Yandex.Metrika informer -->
+    <a href="https://metrika.yandex.ru/stat/?id=26053572&amp;from=informer"
+       target="_blank" rel="nofollow"><img src="//bs.yandex.ru/informer/26053572/3_1_FFFFD2FF_FFE4B2FF_0_pageviews"
+                                           style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)" onclick="try{Ya.Metrika.informer({i:this,id:26053572,lang:'ru'});return false}catch(e){}"/></a>
+    <!-- /Yandex.Metrika informer -->
+
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function (d, w, c) {
+            (w[c] = w[c] || []).push(function() {
+                try {
+                    w.yaCounter26053572 = new Ya.Metrika({id:26053572,
+                        clickmap:true,
+                        trackLinks:true,
+                        accurateTrackBounce:true});
+                } catch(e) { }
+            });
+
+            var n = d.getElementsByTagName("script")[0],
+                    s = d.createElement("script"),
+                    f = function () { n.parentNode.insertBefore(s, n); };
+            s.type = "text/javascript";
+            s.async = true;
+            s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+            if (w.opera == "[object Opera]") {
+                d.addEventListener("DOMContentLoaded", f, false);
+            } else { f(); }
+        })(document, window, "yandex_metrika_callbacks");
+    </script>
+    <noscript><div><img src="//mc.yandex.ru/watch/26053572" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+</div>
+<div class="container" id="footer">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <p>&copy; МБОУ школа №7. Все права защищены. <a class="pull-right" style="color:#b71909" href="{% url 'main:feedbackerror' %}">Сообщить об ошибке</a></p>
+        </div>
+    </div>
+</div>
+<script>
+$(document).ready(function(){
+    $('.bxslider').bxSlider({
+        captions: true,
+        auto: true,
+        adaptiveHeight: true,
+        mode: 'fade',
+        randomStart: true,
+        preloadImages: 'all',
+        pager: false,
+        pause: 5000
+    });
+});
+</script>
+<script type="text/javascript" src="/static/js/special_vis.js"></script>
+</body>
+</html>

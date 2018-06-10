@@ -1,0 +1,32 @@
+<li><a href="{% url 'pages:page' 'stranichka_direktora' %}">Страничка директора</a></li>
+<li><a href="{% url 'pages:page' 'istoriya_shkoly' %}">История школы</a></li>
+<li><a href="{% url 'pages:page' 'shkolnyj_muzej' %}">Школьный музей</a></li>
+<li><a href="{% url 'pages:page' 'priem_v_shkolu' %}">Прием в школу</a></li>
+{#<li><a href="{% url 'pages:page' 'gia_ege' %}">ГИА, ЕГЭ</a></li>#}
+<li>
+    <a href="#" class="a-sub-menu"> <i class="fa fa-2x fa-angle-right pull-right" style="color:#808080"></i> ГИА, ЕГЭ </a>
+    <ul class="nav nav-list sub-menu" onmousemove="$(this).parent().addClass('bg');" onmouseout="$(this).parent().removeClass('bg');">
+        <li><a href="{% url 'pages:page' 'gia-11-klass' %}">ГИА - 11 класс</a></li>
+        <li><a href="{% url 'pages:page' 'gia-9-klass' %}">ГИА - 9 класс</a></li>
+        <li><a href="{% url 'pages:page' 'promezhutochnaya-attestaciya' %}">Промежуточная аттестация</a></li>
+        <li><a href="{% url 'pages:page' 'itogovoe-sochinenie' %}">Итоговое сочинение</a></li>
+        <li><a href="{% url 'pages:page' 'vpr' %}">ВПР</a></li>
+    </ul>
+</li>
+<li>
+    <a href="#" class="a-sub-menu"> <i class="fa fa-2x fa-angle-right pull-right" style="color:#808080"></i> Организация питания </a>
+    <ul class="nav nav-list sub-menu" onmousemove="$(this).parent().addClass('bg');" onmouseout="$(this).parent().removeClass('bg');">
+        <li><a href="{% url 'pages:page' 'obshaya_informaciya' %}">Общая информация</a></li>
+        <li><a href="{% url 'pages:page' 'dokumenty_po_pitaniyu' %}">Документы по питанию</a></li>
+        <li><a href="{% url 'pages:page' 'kontrol_pitaniya' %}">Контроль питания</a></li>
+        <li><a href="{% url 'pages:page' 'razgovor_o_pravilnom_pitanii' %}">Разговор о правильном питании</a></li>
+    </ul>
+</li>
+<li><a href="{% url 'pages:page' 'ozdorovitelnaya_kompaniya' %}">Оздоровительная компания</a></li>
+<li><a href="{% url 'pages:page' 'bezopasnost' %}">Безопасность</a></li>
+<li><a href="{% url 'pages:page' 'internet' %}">Безопасность в сети Интернет</a></li>
+<li><a href="{% url 'pages:page' 'dorozhnaya_bezopasnost' %}">Дорожная безопасность</a></li>
+<li><a href="{% url 'pages:page' 'antikorrupcionnaya_deyatelnost' %}">Антикоррупционная деятельность</a></li>
+<li><a href="{% url 'pages:page' 'pravovoeprosveshenie' %}">Правовое просвещение</a></li>
+<li><a href="{% url 'pages:page' 'attestaciya_povyshenie_kvalifikacii' %}">Аттестация, повышение квалификации<br> педагогических работников</a></li>
+<li><a href="{% url 'pages:page' 'profsoyuz' %}">Профсоюз</a></li>

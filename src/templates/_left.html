@@ -1,0 +1,15 @@
+<div class="sidebar-nav">
+    <ul class="nav nav-list">
+        <li class="text-muted" style="border-bottom: 1px solid grey; margin-bottom: 5px"><strong>Сегодня</strong></li>
+        <script type="text/javascript" src="http://www.protema.ru/widget/widget.php?widget=calendar2014&img_width=250"></script>
+        <noscript><div><a href="http://www.protema.ru/blog/item/296-calendar2014?utm_source=noscript&amp;utm_medium=widget&amp;utm_campaign=calendar2014"><img src="http://www.protema.ru/widget/cache/calendar2014.jpg" alt="ПроТема"></a></div></noscript>
+        <br>
+
+        <li class="text-muted" style="border-bottom: 1px solid grey;"><strong>Учителя</strong></li>
+        <ul class="bxslider" style="height: 200px !important; width: 240px !important; ">
+            {% for teacher in teachers_photo %}
+                <li><a style="display: block;" href="{% url 'accounts:profile' teacher.pk %}"><img style="margin:0 auto !important; max-height: 199px !important; min-height: 198px !important;" title="{{ teacher.get_full_name }}" src="/media/{{ teacher.photo }}"></a></li>
+            {% endfor %}
+        </ul>
+    </ul>
+</div>
