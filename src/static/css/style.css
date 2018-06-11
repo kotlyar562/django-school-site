@@ -1,9 +1,6 @@
 body {
     background: url("../img/bg.png");
 }
-.bor {
-    border: 1px solid red;
-}
 
 #header{
     border-right: 1px solid rgba(0,0,0,0.09);
