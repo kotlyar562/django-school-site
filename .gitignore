@@ -2,6 +2,8 @@
 __pycache__
 /env
 /redactor
-/src/media/*
+/media
+/static
 /src/collect
+/src/media
 /src/local_settings.py
