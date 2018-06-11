@@ -26,7 +26,7 @@
 <div class="container" id="header">
     <div class="row">
         <div class="col-md-12">
-            <img src='/static/img/school.jpg' class="pull-left" style="margin:15px 15px 15px 0">
+            <img src='/static/img/school.jpg' class="pull-left logo">
             <div class="pull-right" style="margin:15px 0 15px 0">
                 {% if user.is_authenticated %}
                     {% if user.photo %}<img class="img-rounded pull-left" style="max-height: 95px; margin-right: 10px" src='/media/{{ user.photo }}'>{% endif %}

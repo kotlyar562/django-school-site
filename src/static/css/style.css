@@ -34,6 +34,12 @@ body {
     font-size: 13px;
 }
 
+.logo {
+  margin:15px 15px 15px 0;
+  max-height:100px;
+  max-width: 200px;
+}
+
 .main_conteiner {
     border-radius: 5px;
     border: 1px solid rgba(0,0,0,0.09);
