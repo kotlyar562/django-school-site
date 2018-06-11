@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+
+{% block head %}
+    <link rel="stylesheet" href="/static/redactor/css/redactor.css" />
+    <script src="/static/redactor/redactor.js"></script>
+
+    <script type="text/javascript" src="/static/redactor/jquery.redactor.init.js"></script>
+    <script type="text/javascript" src="/static/redactor/redactor.js"></script>
+    <script type="text/javascript" src="/static/redactor/langs/ru.js"></script>
+    <script type="text/javascript" src="/static/redactor/plugins/table.js"></script>
+    <script type="text/javascript" src="/static/redactor/plugins/filemanager.js"></script>
+    <script type="text/javascript" src="/static/redactor/plugins/fontcolor.js"></script>
+    <script type="text/javascript" src="/static/redactor/plugins/fontfamily.js"></script>
+    <script type="text/javascript" src="/static/redactor/plugins/fontsize.js"></script>
+    <script type="text/javascript" src="/static/redactor/plugins/fullscreen.js"></script>
+    <script type="text/javascript" src="/static/redactor/plugins/imagemanager.js"></script>
+    <script type="text/javascript" src="/static/redactor/plugins/video.js"></script>
+{% endblock %}
+
+
+{% block title %}Добавить мероприятие в МБОУ школе №7{% endblock %}
+
+{% block center %}
+    <div class="col-md-8 col-md-offset-2">
+        <form method="post">{% csrf_token %}
+            <h3><span>Добавить мероприятие</span></h3>
+            <fieldset>
+                {{ form|bootstrap }}
+            </fieldset>
+            <button class="btn btn-success btn-block" type="submit">Сохранить</button>
+        </form>
+        <hr>
+    </div>
+
+{% endblock %}

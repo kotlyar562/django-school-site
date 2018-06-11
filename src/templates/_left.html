@@ -4,7 +4,36 @@
         <script type="text/javascript" src="http://www.protema.ru/widget/widget.php?widget=calendar2014&img_width=250"></script>
         <noscript><div><a href="http://www.protema.ru/blog/item/296-calendar2014?utm_source=noscript&amp;utm_medium=widget&amp;utm_campaign=calendar2014"><img src="http://www.protema.ru/widget/cache/calendar2014.jpg" alt="ПроТема"></a></div></noscript>
         <br>
-
+        {% if events_now or events_tomorrow %}
+          <ul class="list-group">
+            <a href={% url 'events:index' %} style="text-decoration: none;">
+              <li class="list-group-item list-group-item-success">
+                <h5>Календарь →</h5>
+              </li>
+            </a>
+            {% for item in events_now %}
+              <li class="list-group-item">
+                <h5 class="list-group-item-heading text-success">
+                  {{item.title}}
+                </h4>
+                <p class="list-group-item-text text-success">
+                  <i class="fa fa-calendar"></i> {{ item.date_begin|date:"d.m.Y" }} {% if item.date_end and not item.date_end == item.date_begin %} - {{ item.date_end|date:"d.m.Y" }}{% endif %}
+                </p>
+              </li>
+            {% endfor %}
+            {% for item in events_tomorrow %}
+              <li class="list-group-item">
+                <h5 class="list-group-item-heading text-info">
+                  {{item.title}}
+                </h4>
+                <p class="list-group-item-text text-info">
+                  <i class="fa fa-calendar"></i> {{ item.date_begin|date:"d.m.Y" }} {% if item.date_end and not item.date_end == item.date_begin %} - {{ item.date_end|date:"d.m.Y" }}{% endif %}
+                </p>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+        <br>
         <li class="text-muted" style="border-bottom: 1px solid grey;"><strong>Учителя</strong></li>
         <ul class="bxslider" style="height: 200px !important; width: 240px !important; ">
             {% for teacher in teachers_photo %}

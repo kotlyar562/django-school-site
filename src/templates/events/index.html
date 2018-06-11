@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block title %}Календарь мероприятий{% endblock %}
+
+{% block head %}
+    <link rel='stylesheet' href='/static/fullcalendar/fullcalendar.css' />
+
+    <script src='/static/fullcalendar/lib/moment.min.js'></script>
+    <script src='/static/fullcalendar/fullcalendar.js'></script>
+    <script src='/static/fullcalendar/locale/ru.js'></script>
+
+    <meta property="og:title" content="Календарь событий - МБОУ школа №7" />
+    <meta property="og:url" content="http://feo-school7.ru{% url 'events:index' %}" />
+    <meta property="og:image" content="http://feo-school7.ru/static/img/school.jpg" />
+{% endblock %}
+
+{% block center %}
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="titleh4"><span>Календарь мероприятий</span></h4>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-info">Нажмите на мероприятие, чтобы
+                      узнать подробности
+                    </div>
+                    <div id='calendar'></div>
+                </div>
+            </div>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"></div>
+            <hr>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            var now = new Date();
+            var events = {{ events|safe }};
+            var res = [];
+            for (var i=0;i<events.length;i++) {
+                var el = {};
+                el['id'] = events[i].pk;
+                el['title'] = events[i].fields.title;
+                el['start'] = events[i].fields.date_begin;
+                switch (events[i].fields.etype) {
+                  case 0:
+                    el['color'] = '#dd3300'
+                    el['textColor'] = '#ffffff';
+                    break;
+                  case 1:
+                    el['color'] = '#5A009D';
+                    el['textColor'] = '#ffffff';
+                    break;
+                  case 2:
+                    el['color'] = '#ffff30';
+                    el['textColor'] = '#333333';
+                    break;
+                  case 5:
+                    el['color'] = '#3a87ad';
+                    el['textColor'] = '#ffffff';
+                    break;
+                  default:
+                    el['color'] = '#3a87ad';
+                    el['textColor'] = '#ffffff';
+                    break;
+                }
+                el['allDay'] = false;
+                if (events[i].fields.date_end) {el['end'] = events[i].fields.date_end+'T23:00:00'}
+                res.push(el);
+            }
+            $('#calendar').fullCalendar({
+                locale: 'ru',
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: ''
+                },
+                eventLimit: 5,
+                displayEventTime: false,
+                events: res,
+                eventClick: function(calEvent, jsEvent, view) {
+                    $.ajax({
+                        type: 'GET',
+                        url: '/events/get_event/',
+                        data: {'pk': calEvent.id},
+                        success: function (html) {
+                            $('#myModal').html(html);
+                            $('#myModal').modal();
+                        }
+                    })
+                }
+            });
+        });
+    </script>
+{% endblock %}

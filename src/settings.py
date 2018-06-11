@@ -52,6 +52,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'src.context_processors.get_teachers_photo',
+                'src.context_processors.get_first_events',
             ],
         },
     },
