@@ -11,7 +11,8 @@ from . forms import FeedbackForm, FeedbackErrorForm
 def index(request):
     last_news = News.objects.all().order_by('-date_add')[:4]
     last_articles = Article.objects.all().order_by('-date_add')[:12]
-    home_text = Page.objects.get(slug=u'home')
+    home_text = Page.objects.filter(slug=u'home')
+    home_text = home_text[0] if home_text else ""
     return render(request, 'main/index.html', locals())
 
 
