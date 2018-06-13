@@ -20,8 +20,8 @@ class OtherNewsManager(models.Manager):
 
 class News(models.Model):
     title = models.CharField(verbose_name='Заголовок', max_length=200)
-    content = RedactorField(verbose_name='Текст')
     date_add = models.DateField(verbose_name='Дата публикации', default=timezone.now)
+    content = RedactorField(verbose_name='Текст')
     important = models.BooleanField(verbose_name='Важная новость', default=False)
     author = models.ForeignKey(User, verbose_name='Автор', on_delete=models.SET_NULL,
                                blank=True, null=True)
